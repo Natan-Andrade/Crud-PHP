@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
 
     <link rel="stylesheet" href="css/style.css">
-    <title>Contact Form #1</title>
+    <title>Notepad</title>
 </head>
 
     <body>
@@ -59,9 +59,6 @@
                                     </div>
                                 </form>
                                 <div id="form-message-warning mt-4"></div>
-                                <div id="form-message-success">
-                                    Your message was sent, thank you!
-                                </div>
                             </div>
                             <div class="col-lg-4 ml-auto">
                                 <h3 class="mb-4">Suas anotações</h3>

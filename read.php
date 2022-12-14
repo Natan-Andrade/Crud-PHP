@@ -37,7 +37,7 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
 
     <link rel="stylesheet" href="css/style.css">
-    <title>Contact Form #1</title>
+    <title>Notepad</title>
 </head>
 
     <body>
