@@ -1,10 +1,21 @@
 <?php
     require 'conectdb.php';
 
-    //insert
-    if(isset($_POST['titulo'])){
-        $sql = $pdo->prepare("INSERT INTO tb_notas VALUES (null,?,?)");
-        $sql->execute(array($_POST['titulo'],$_POST['conteudo']));
+    $tb_notas = [];
+    $id = filter_input(INPUT_GET, 'id');
+    if($id){
+        $sql = $pdo->prepare("SELECT * FROM tb_notas WHERE id = :id");
+        $sql->bindValue(':id', $id);
+        $sql->execute();
+
+        if($sql->rowCount() > 0){
+            $tb_notas = $sql->fetch(PDO::FETCH_ASSOC);
+        }else{
+            header("Location: index.php");
+            exit;
+        }
+    }else{
+        header("Location: index.php");
     }
 
     //delete
@@ -13,6 +24,7 @@
         $pdo->exec("DELETE FROM tb_notas WHERE id=$id");
     }
 ?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -35,33 +47,8 @@
                     <div class="col-md-10">
                         <div class="row align-items-center">
                             <div class="col-lg-7 mb-5 mb-lg-0">
-                                <h2 class="mb-5">Crie uma anotação</h2>
-                            
-                                <form class="border-right pr-5 mb-5" method="post" id="contactForm" name="contactForm">
-
-                                    <div class="row">
-                                        <div class="col-md-12 form-group">
-                                            <input type="text" class="form-control" name="titulo" id="email" placeholder="Titulo">
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-12 form-group">
-                                            <textarea class="form-control" name="conteudo" id="message" cols="30" rows="7" placeholder="Write your message"></textarea>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <input type="submit" value="Salvar" class="btn btn-primary rounded-0 py-2 px-4">
-                                            <span class="submitting"></span>
-                                        </div>
-                                    </div>
-                                </form>
-                                <div id="form-message-warning mt-4"></div>
-                                <div id="form-message-success">
-                                    Your message was sent, thank you!
-                                </div>
+                                <h2 class="mb-5"><?= $tb_notas['titulo'];?></h2>
+                                <p><?= $tb_notas['titulo'];?></p>
                             </div>
                             <div class="col-lg-4 ml-auto">
                                 <h3 class="mb-4">Suas anotações</h3>
