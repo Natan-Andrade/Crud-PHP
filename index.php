@@ -14,3 +14,16 @@
     <input type="text" name="conteudo">
     <input type="submit" value="Enviar!">
 </form>
+
+<?php
+    //List
+    $sql = $pdo->prepare("SELECT * FROM tb_notas");
+    $sql->execute();
+
+    $fetchNotas = $sql->fetchAll();
+
+    foreach ($fetchNotas as $key => $value){
+        echo $value['titulo'].' | '.$value['conteudo'];
+        echo '<hr>';
+    }
+?>
